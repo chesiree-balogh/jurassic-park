@@ -5,22 +5,28 @@ namespace jurassic_park
 {
   public class Dino
   {
+    //structure to represtent a piece of data inside of app
+
+
 
     //dino properties:
     //1 name
-    public string DinoName { get; set; }
+    public string dinoName { get; set; }
 
     //2 dietType
-    public string DinoDiet { get; set; }
+    public string dinoDiet { get; set; }
 
     //3 dataAcquired
-    public string DinoAddDate { get; set; }
+    public DateTime dinoAddDate { get; set; }
+    //public DateTime dinoAddDate {get; set;} = DateTime.Now
 
     //4 weight (in pounds)
-    public int DinoWeight { get; set; }
+    public int dinoWeight { get; set; }
 
     //5 enclosureNumber (the pen number dino is in)
-    public int DinoPenNumber { get; set; }
+    public int dinoPenNumber { get; set; }
+
+
 
   }
 }

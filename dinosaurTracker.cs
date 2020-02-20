@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace jurassic_park
 {
@@ -11,11 +13,11 @@ namespace jurassic_park
     {
       var dino = new Dino
       {
-        DinoName = what,
-        DinoDiet = diet,
-        DinoAddDate = when,
-        DinoWeight = weight,
-        DinoPenNumber = penNumber
+        dinoName = what,
+        dinoDiet = diet,
+        dinoAddDate = DateTime.Now,
+        dinoWeight = weight,
+        dinoPenNumber = penNumber
       };
 
       Dinosaurs.Add(dino);
@@ -24,19 +26,38 @@ namespace jurassic_park
     public void RemoveADino(string what)
     //removing a dino by name
     {
-      Dinosaurs.RemoveAll(dino => dino.DinoName == what);
+      Dinosaurs.RemoveAll(dino => dino.dinoName == what);
     }
+
+
+
 
 
 
     //transfering dino pen to pen
     //allow input to search name and current pen
     //create method to change just pen number
-    public void TransferADino(string DinoToTrans, int CurrentPen, int NewPen)
+    public void TransferADino(string what)
     {
-
+      var DinoToTrans = Dinosaurs.IndexOf(Dinosaurs.First(what => Dinosaurs.Contains(what)));
+      Console.WriteLine($"which pen would you like to put them?");
+      var newPen = int.Parse(Console.ReadLine());
+      Dinosaurs[DinoToTrans].dinoPenNumber = newPen;
     }
+    //this get put here cuz its backend work
+    //public void TransferADino (string who, string pen)
+    //{ var dino = Dinosaurs.First(dinosaur => dinosaur.Name == what);
+    //dino.DinoPenNumber = int.Parse(pen);}
 
+
+    public void ThreeHeaviest()
+    {
+      var heaviest = Dinosaurs.OrderByDescending(dino => dino.dinoWeight).Take(3);
+      foreach (var dino in heaviest)
+      {
+        Console.WriteLine($"{dino.dinoName}");
+      }
+    }
 
     //VIEW options:
 
@@ -48,6 +69,21 @@ namespace jurassic_park
 
 
     //how many dinos have the same diet
+    public void DinoDietSummary()
+    {
+      var vegDino = Dinosaurs.Where(dinosaur => dinosaur.dinoDiet.Contains("Herbivore")).ToList();
+      Console.WriteLine($" there are {vegDino.Count} herbivore");
+
+      var carnDino = Dinosaurs.Where(dinosaur => dinosaur.dinoDiet.Contains("Carnivore")).ToList();
+      Console.WriteLine($" there are {vegDino.Count} carnivore");
+    }
+
+    //var vegDino = Dinosaurs.Count(dinosaur => dinosaur.dinoDiet.Contains("Herbivore"));
+    //Console.WriteLine($" there are {vegDino} herbivore");
+
+
+
+
     //sort dinos by diets
     //add them to their own lists
     //count number of items in list
